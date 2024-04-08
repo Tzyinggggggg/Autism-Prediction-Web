@@ -1,0 +1,37 @@
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Images</h1>
+    <input type="file",accept="video/mp4">
+    <button>Submit</button>
+ 
+    <h2>Video List</h2>
+    <ul id="video_list"></ul>
+    <script>
+        const video_endpoint = "http://localhost:3000/video"
+
+        const load_videos = async () => {
+            let videos = await fetch(video_endpoint)
+            .then(response => response.json())
+            .catch(error => console.log(error))
+            if(videos){
+                for(video of videos){
+                    add_video_to_list(video)
+                }
+            }
+        }
+
+        load_videos()
+
+        const add_video_to_list = (video) => {
+            let video_list = document.getElement("vid")
+            vid.src = video.file
+            vid.width = 320
+            let video_item = document.createElement("li")
+            {% comment %} video_item.innerHTML = video.name {% endcomment %}
+            video_list.appendChild(video_item)
+        }

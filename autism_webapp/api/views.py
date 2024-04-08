@@ -3,21 +3,16 @@ from django.http import HttpResponse, JsonResponse
 from rest_framework import generics
 from .models import Patient
 from .serializers import PatientSerializer
-
+# from vcab import Model, save_video_stream_predictions
+from .models import Video
 # Create your views here.
+
+
+def index(request):
+    video = Video.objects.all()
+    return render(request, 'index.html', {'video': video})
 
 
 class PatientView(generics.CreateAPIView):
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer
-
-    def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        if serializer.is_valid():
-            self.perform_create(serializer)
-            patient_data = serializer.data  # Serialized patient data
-            # Return JSON response
-            return JsonResponse(patient_data, status=201)
-        else:
-            # Return errors if serializer is invalid
-            return JsonResponse(serializer.errors, status=400)

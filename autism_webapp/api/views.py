@@ -46,6 +46,14 @@ class VideoUploadView(APIView):
         # Create a dictionary containing both the video file and the title
         data = {'title': title, 'video': request.data.get('video')}
 
+        # Get video stream predictions
+        predictions = Model().predict_stream(video_path=data.video)
+
+        # Mask video with prediction
+        save_video_stream_predictions(
+            video_path=data.video,
+            predictions=predictions,
+            output_path=data.title + ".mp4")
         # Pass the combined data to the serializer
         serializer = VideoSerializer(data=data)
 

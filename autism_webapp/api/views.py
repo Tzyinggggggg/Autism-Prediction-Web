@@ -70,12 +70,6 @@ class PatientView(generics.CreateAPIView):
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer
 
-    # def post(self, request, *args, **kwargs):
-    #     predictions = Model.predict_stream(request.data['video'])
-    #     save_video_stream_predictions(request.data['video'], predictions)
-
-
-# <QueryDict: {'csrfmiddlewaretoken': ['fbu8ZMlElUw65rwUSS2erD0fvdQtWd5O9fBSOP8n8ZppHX3QlBZVusMIWDuPh5FI'], 'title': ['taets o'], 'video_output': [''], 'results': ['null'], 'prediction_percentage': [''], 'patient': ['fee466f0-2a94-4c13-9767-449d575ba6b8'], 'video': [<TemporaryUploadedFile: v_ArmFlapping_01.mp4 (video/mp4)>, <TemporaryUploadedFile: v_ArmFlapping_01.mp4 (video/mp4)>]}>
 class VideoAPIView(APIView):
     serializer_class = VideoSerializer
 

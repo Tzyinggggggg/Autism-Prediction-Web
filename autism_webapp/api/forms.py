@@ -8,4 +8,4 @@ class VideoUploadForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(VideoUploadForm, self).__init__(*args, **kwargs)
-        self.fields['patient'].queryset = Patient.objects.all()
+        # self.fields['patient'].queryset = Patient.objects.all()

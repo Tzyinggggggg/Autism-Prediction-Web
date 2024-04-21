@@ -3,7 +3,7 @@ from django.http import HttpRequest, HttpResponse, JsonResponse
 from rest_framework import generics
 from .models import Patient
 from .serializers import PatientSerializer
-from vcab import Model, save_video_stream_predictions
+from vcab import Model, save_video_stream_predictions_v2
 from .models import Video
 from rest_framework.views import APIView
 from .serializers import VideoSerializer
@@ -70,6 +70,7 @@ class PatientView(generics.CreateAPIView):
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer
 
+
 class VideoAPIView(APIView):
     serializer_class = VideoSerializer
 
@@ -88,7 +89,7 @@ class VideoAPIView(APIView):
                 str(video.title) + str(video.pk) + "_output.mp4"
 
             # Mask video with prediction
-            save_video_stream_predictions(
+            save_video_stream_predictions_v2(
                 video_path=video.video.path,
                 predictions=predictions,
                 output_path='media/videos/' + output_path)

@@ -1,19 +1,491 @@
 /** @format */
+"use client";
+import {
+	Bird,
+	Book,
+	Bot,
+	Code2,
+	CornerDownLeft,
+	LifeBuoy,
+	Mic,
+	Paperclip,
+	Rabbit,
+	Settings,
+	Settings2,
+	Share,
+	SquareTerminal,
+	SquareUser,
+	Triangle,
+	Turtle,
+} from "lucide-react";
 
-// Home.tsx
-import React from "react";
-import Title from "@/app/components/title";
-import SubmitButton from "@/app/components/submit_button";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+	Drawer,
+	DrawerContent,
+	DrawerDescription,
+	DrawerHeader,
+	DrawerTitle,
+	DrawerTrigger,
+} from "@/components/ui/drawer";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipTrigger,
+	TooltipProvider,
+} from "@/components/ui/tooltip";
+import ReactPlayer from "react-player";
+import JsPDF from "jspdf";
 
-const Home = () => {
-	return (
-		<main>
-			<h1>
-				<Title text='Autism Prediction' />
-			</h1>
-			<SubmitButton />
-		</main>
+interface ApiOutput {
+	id: number;
+	title: string;
+	video: string;
+	video_output: string;
+	results: [number, number, [string, number][]];
+	prediction_percentage: string;
+	created_at: string;
+	patient: string;
+}
+
+const API_OUTPUT = {
+	id: 163,
+	title: "try",
+	video: "/media/videos/202403071521_TawFlai.mp4",
+	video_output: "/media/videos/andretry163_output.mp4",
+	results: [
+		[
+			0,
+			2.6666666666666665,
+			[
+				["armflapping", 68.99],
+				["headbanging", 15.32],
+				["normal", 14.95],
+				["spinning", 0.74],
+			],
+		],
+		[
+			2.6666666666666665,
+			5.333333333333333,
+			[
+				["normal", 99.7],
+				["headbanging", 0.29],
+				["armflapping", 0.0],
+				["spinning", 0.0],
+			],
+		],
+		[
+			5.333333333333333,
+			8.0,
+			[
+				["normal", 96.57],
+				["headbanging", 3.37],
+				["armflapping", 0.06],
+				["spinning", 0.0],
+			],
+		],
+		[
+			8.0,
+			10.666666666666666,
+			[
+				["normal", 96.71],
+				["headbanging", 3.28],
+				["armflapping", 0.01],
+				["spinning", 0.0],
+			],
+		],
+		[
+			10.666666666666666,
+			13.333333333333332,
+			[
+				["headbanging", 59.83],
+				["normal", 25.8],
+				["armflapping", 14.3],
+				["spinning", 0.07],
+			],
+		],
+		[
+			13.333333333333332,
+			15.999999999999998,
+			[
+				["spinning", 66.32],
+				["armflapping", 17.31],
+				["headbanging", 16.37],
+				["normal", 0.01],
+			],
+		],
+		[
+			15.999999999999998,
+			18.666666666666664,
+			[
+				["normal", 99.96],
+				["headbanging", 0.03],
+				["armflapping", 0.01],
+				["spinning", 0.0],
+			],
+		],
+		[
+			18.666666666666664,
+			21.333333333333332,
+			[
+				["armflapping", 79.64],
+				["headbanging", 19.22],
+				["spinning", 1.12],
+				["normal", 0.03],
+			],
+		],
+		[
+			21.333333333333332,
+			24.0,
+			[
+				["headbanging", 52.17],
+				["armflapping", 44.05],
+				["normal", 3.42],
+				["spinning", 0.37],
+			],
+		],
+		[
+			24.0,
+			26.666666666666668,
+			[
+				["normal", 99.99],
+				["headbanging", 0.0],
+				["armflapping", 0.0],
+				["spinning", 0.0],
+			],
+		],
+		[
+			26.666666666666668,
+			29.333333333333336,
+			[
+				["normal", 99.76],
+				["headbanging", 0.12],
+				["armflapping", 0.12],
+				["spinning", 0.0],
+			],
+		],
+		[
+			29.333333333333336,
+			32.0,
+			[
+				["armflapping", 67.37],
+				["headbanging", 16.82],
+				["spinning", 15.68],
+				["normal", 0.13],
+			],
+		],
+		[
+			32.0,
+			34.666666666666664,
+			[
+				["normal", 69.85],
+				["armflapping", 24.68],
+				["headbanging", 5.43],
+				["spinning", 0.04],
+			],
+		],
+		[
+			34.666666666666664,
+			37.33333333333333,
+			[
+				["normal", 99.86],
+				["headbanging", 0.09],
+				["armflapping", 0.05],
+				["spinning", 0.0],
+			],
+		],
+		[
+			37.33333333333333,
+			39.99999999999999,
+			[
+				["normal", 100.0],
+				["headbanging", 0.0],
+				["armflapping", 0.0],
+				["spinning", 0.0],
+			],
+		],
+		[
+			39.99999999999999,
+			42.66666666666666,
+			[
+				["normal", 96.78],
+				["headbanging", 3.15],
+				["armflapping", 0.06],
+				["spinning", 0.0],
+			],
+		],
+		[
+			42.66666666666666,
+			45.33333333333332,
+			[
+				["normal", 97.16],
+				["headbanging", 2.82],
+				["armflapping", 0.02],
+				["spinning", 0.0],
+			],
+		],
+		[
+			45.33333333333332,
+			47.999999999999986,
+			[
+				["normal", 69.9],
+				["headbanging", 29.86],
+				["armflapping", 0.22],
+				["spinning", 0.02],
+			],
+		],
+		[
+			47.999999999999986,
+			50.66666666666665,
+			[
+				["normal", 91.1],
+				["headbanging", 8.79],
+				["armflapping", 0.11],
+				["spinning", 0.01],
+			],
+		],
+		[
+			50.66666666666665,
+			53.333333333333314,
+			[
+				["normal", 99.76],
+				["headbanging", 0.23],
+				["armflapping", 0.01],
+				["spinning", 0.0],
+			],
+		],
+	],
+	prediction_percentage: "90%",
+	created_at: "2024-04-19T09:58:21.283383Z",
+	patient: "7dd963da-edaa-4f9b-88ff-348577899b30",
+};
+type Result = [number, number, [string, number][]];
+
+// Initialize total duration variables for each behavior
+function calculateTotalTime(results: Result[]): number {
+	return results.reduce(
+		(totalTime, [start, end]) => totalTime + (end - start),
+		0
 	);
+}
+
+// Remove the duplicate type declaration
+// type Result = [number, number, [string, number][]];
+
+function calculateBehaviorTime(results: Result[], behavior: string): number {
+	let behaviorTime = 0;
+	results.forEach(([start, end, behaviors]) => {
+		const behaviorPercentage = behaviors.find(
+			([name]) => name === behavior
+		)?.[1];
+		if (behaviorPercentage) {
+			behaviorTime += (end - start) * (behaviorPercentage / 100);
+		}
+	});
+	return behaviorTime;
+}
+
+const totalTime = calculateTotalTime(API_OUTPUT.results as Result[]);
+const normalTime = calculateBehaviorTime(
+	API_OUTPUT.results as Result[],
+	"normal"
+);
+const headbangingTime = calculateBehaviorTime(
+	API_OUTPUT.results as Result[],
+	"headbanging"
+);
+const armflappingTime = calculateBehaviorTime(
+	API_OUTPUT.results as Result[],
+	"armflapping"
+);
+const spinningTime = calculateBehaviorTime(
+	API_OUTPUT.results as Result[],
+	"spinning"
+);
+
+// Store the calculated times in a library for later retrieval
+const behaviorTimes = {
+	normal: normalTime,
+	headbanging: headbangingTime,
+	armflapping: armflappingTime,
+	spinning: spinningTime,
 };
 
-export default Home;
+export { behaviorTimes };
+
+// import video from "../../public/andretry163_output.mp4";
+const generatePDF = () => {
+	const reportElement = document.querySelector(".pdf-content") as HTMLElement;
+	if (reportElement) {
+		const report = new JsPDF("portrait", "pt", "a4");
+		report.html(reportElement).then(() => {
+			report.save("report.pdf");
+		});
+	}
+};
+
+export default function Dashboard() {
+	return (
+		<div className='grid h-screen w-full pl-[56px]'>
+			<aside className='inset-y fixed  left-0 z-20 flex h-full flex-col border-r'>
+				<div className='border-b p-2'>
+					<Button variant='outline' size='icon' aria-label='Home'>
+						<Triangle className='size-5 fill-foreground' />
+					</Button>
+				</div>
+				<nav className='mt-auto grid gap-1 p-2'>
+					<TooltipProvider>
+						<Tooltip>
+							<TooltipTrigger asChild>
+								<Button
+									variant='ghost'
+									size='icon'
+									className='mt-auto rounded-lg'
+									aria-label='Help'
+								>
+									<LifeBuoy className='size-5' />
+								</Button>
+							</TooltipTrigger>
+							<TooltipContent side='right' sideOffset={5}>
+								Help
+							</TooltipContent>
+						</Tooltip>
+					</TooltipProvider>
+					<TooltipProvider>
+						<Tooltip>
+							<TooltipTrigger asChild>
+								<Button
+									variant='ghost'
+									size='icon'
+									className='mt-auto rounded-lg'
+									aria-label='Account'
+								>
+									<SquareUser className='size-5' />
+								</Button>
+							</TooltipTrigger>
+							<TooltipContent side='right' sideOffset={5}>
+								Account
+							</TooltipContent>
+						</Tooltip>
+					</TooltipProvider>
+				</nav>
+			</aside>
+			<div className='flex flex-col'>
+				<header className='sticky top-0 z-10 flex h-[57px] items-center gap-1 border-b bg-background px-4'>
+					<h1 className='text-xl font-semibold'>Autism Prediction</h1>
+					<div className='ml-auto gap-1.5 text-sm'>
+						<div className='ml-auto'>
+							<Button variant='outline' size='sm' className='mr-2 text-sm'>
+								Predict
+							</Button>
+							<Button
+								variant='outline'
+								size='sm'
+								className='text-sm'
+								onClick={generatePDF}
+							>
+								Generate PDF
+							</Button>
+						</div>
+					</div>
+				</header>
+				<main className='grid flex-1 gap-4 overflow-auto p-4 md:grid-cols-2 lg:grid-cols-3'>
+					<div
+						className='pdf-content relative hidden flex-col items-start gap-8 md:flex'
+						x-chunk='dashboard-03-chunk-0'
+					>
+						<form className='grid w-full items-start gap-6'>
+							<fieldset className='grid gap-6 rounded-lg border p-4'>
+								<legend className='-ml-1 px-1 text-sm font-medium'>
+									Result
+								</legend>
+								<div className='grid gap-3'>
+									<Label htmlFor='PatientName'>
+										Patient Name: {API_OUTPUT.title}
+									</Label>
+									<Label style={{ marginTop: "10px" }}>
+										Self-stimulatory behavior :
+										<ul style={{ marginTop: "20px" }}>
+											<li style={{ marginBottom: "10px" }}>
+												Normal : {behaviorTimes.normal.toFixed(2)} minutes
+											</li>
+											<li style={{ marginBottom: "10px" }}>
+												Headbanging : {behaviorTimes.headbanging.toFixed(2)}{" "}
+												minutes
+											</li>
+											<li style={{ marginBottom: "10px" }}>
+												Armflapping : {behaviorTimes.armflapping.toFixed(2)}{" "}
+												minutes
+											</li>
+											<li style={{ marginBottom: "10px" }}>
+												Spinning : {behaviorTimes.spinning.toFixed(2)} minutes
+											</li>
+										</ul>
+									</Label>
+								</div>
+							</fieldset>
+
+							<fieldset className='grid gap-6 rounded-lg border p-4'>
+								<legend className='-ml-1 px-1 text-sm font-medium'>
+									Emotion :
+								</legend>
+								<Label htmlFor=''>
+									<ul>
+										<li style={{ marginBottom: "10px" }}>Happy :</li>
+										<li style={{ marginBottom: "10px" }}>Sad :</li>
+										<li style={{ marginBottom: "10px" }}>Angry :</li>
+									</ul>
+								</Label>
+							</fieldset>
+						</form>
+					</div>
+					<div className='relative flex h-full min-h-[50vh] flex-col rounded-xl bg-muted/50 p-4 lg:col-span-2'>
+						<Badge variant='outline' className='absolute right-3 top-3'>
+							Output
+						</Badge>
+						<div className='flex-1' />
+
+						<form
+							className='relative overflow-hidden rounded-lg border bg-background focus-within:ring-1 focus-within:ring-ring'
+							x-chunk='dashboard-03-chunk-1'
+						>
+							<Label htmlFor='message' className='sr-only'>
+								Message
+							</Label>
+							<Textarea className='min-h-12 resize-none border-0 p-3 shadow-none focus-visible:ring-0' />
+							<div className='flex items-center p-3 pt-0'>
+								<TooltipProvider>
+									<Tooltip>
+										<TooltipTrigger asChild>
+											<Button variant='ghost' size='icon'>
+												<Paperclip className='size-4' />
+
+												<span className='sr-only'>Attach file</span>
+											</Button>
+										</TooltipTrigger>
+										<TooltipContent side='top'>Attach File</TooltipContent>
+									</Tooltip>
+								</TooltipProvider>
+								<Button type='submit' size='sm' className='ml-auto gap-1.5'>
+									Predict
+									<CornerDownLeft className='size-3.5' />
+								</Button>
+							</div>
+						</form>
+					</div>
+				</main>
+			</div>
+		</div>
+	);
+}

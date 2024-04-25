@@ -277,6 +277,7 @@ const generatePDF = () => {
 };
 
 export default function Dashboard() {
+	const [loading, setLoading] = useState(false);
 	const [patientName, setPatientName] = useState("");
 
 	const [data, setData] = useState<{
@@ -312,7 +313,7 @@ export default function Dashboard() {
 	const [videoUrl, setVideoUrl] = useState("");
 	const uploadVideo = async (data: any) => {
 		console.log(data);
-
+		setLoading(true);
 		const formData = new FormData();
 		formData.append("patient", data["patient"]);
 		formData.append("results", JSON.stringify(data["results"])),
@@ -359,6 +360,7 @@ export default function Dashboard() {
 				setVideoUrl(outputUrl);
 			}
 		});
+		setLoading(false);
 	};
 
 	// Update behavior times when data changes
@@ -499,22 +501,31 @@ export default function Dashboard() {
 						<Badge variant='outline' className='absolute right-3 top-3'>
 							Output
 						</Badge>
-						<div className='flex items-center justify-center'>
+						<div
+							className='flex items-center justify-center'
+							style={{height: "50%" }}
+						>
 							<ReactPlayer
 								className='react-player'
 								url={videoUrl}
-								width='100%'
+								width='50%'
 								height='70%'
 								controls={true}
 								style={{ minWidth: "100px", minHeight: "100px" }} // Set the minimum width and height for the video
 							/>
 						</div>
 
-						<div className='min-h-12 resize-none border-0 p-3 shadow-none focus-visible:ring-0' />
-						<div className='relative flex-grow'>
+						<div className='resize-none border-0 p-3 shadow-none focus-visible:ring-0' />
+						{/* <div className='relative flex-grow'>
 							<div className='timeline'>
 								<div className='relative flex-grow'></div>
 							</div>
+						</div> */}
+						<div
+							className='progress-bar'
+							style={{ display: loading ? "block" : "none" }}
+						>
+							<div className='progress-bar-inner' />
 						</div>
 						<div className='flex items-center p-3 pt-0'>
 							<TooltipProvider>
@@ -529,10 +540,6 @@ export default function Dashboard() {
 												setData({ ...data, video: file });
 											}}
 										/>
-										{/* <Button variant='ghost' size='icon'>
-												<Paperclip className='size-4' />
-												<span className='sr-only'>Attach file</span>
-											</Button> */}
 									</TooltipTrigger>
 									<TooltipContent side='top'>Attach File</TooltipContent>
 								</Tooltip>

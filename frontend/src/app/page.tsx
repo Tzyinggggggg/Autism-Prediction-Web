@@ -503,7 +503,7 @@ export default function Dashboard() {
 						</Badge>
 						<div
 							className='flex items-center justify-center'
-							style={{height: "50%" }}
+							style={{ height: "50%" }}
 						>
 							<ReactPlayer
 								className='react-player'

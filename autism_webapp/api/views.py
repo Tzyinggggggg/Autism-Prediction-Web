@@ -17,6 +17,8 @@ from django.urls import reverse
 from django.middleware.csrf import get_token
 import json
 import requests
+from pathlib import Path
+from django.core.files import File
 
 
 def index(request):
@@ -25,15 +27,13 @@ def index(request):
         if form.is_valid():
             form.save()
 
-            title = form.cleaned_data['title']
-            patient = form.cleaned_data['patient'].patient_id
+            patient = form.cleaned_data['patient']
             video = form.cleaned_data['video']
 
             csrf_token = get_token(request=request)
             headers = {'X-CSRFToken': csrf_token}
             data = {
                 "csrfmiddlewaretoken": csrf_token,
-                "title": title,
                 "patient": patient,
                 "results": {},
                 "prediction_percentage": "",
@@ -66,18 +66,13 @@ def index(request):
     return render(request, 'index.html', {'form': form})
 
 
-class PatientView(generics.CreateAPIView):
-    queryset = Patient.objects.all()
-    serializer_class = PatientSerializer
-
-
 class VideoAPIView(APIView):
     serializer_class = VideoSerializer
 
     def post(self, request):
         data = request.data
-        files = request.FILES
-        data.update(files)
+
+        print(data)
 
         serializer = self.serializer_class(data=data)
         if serializer.is_valid():
@@ -85,18 +80,19 @@ class VideoAPIView(APIView):
             video: Video = serializer.save()
             predictions = Model().predict_stream(video_path=video.video.path)
 
-            output_path = str(video.patient) + \
-                str(video.title) + str(video.pk) + "_output.mp4"
+            output_path = str(video.patient) + str(video.pk) + "_output.mp4"
 
             # Mask video with prediction
             save_video_stream_predictions_v2(
                 video_path=video.video.path,
                 predictions=predictions,
                 output_path='media/videos/' + output_path)
-
-            video.video_output = 'videos/' + output_path
+            
+            path = Path('media/videos/' + output_path)
             video.results = predictions
-            video.save()
+            with path.open(mode='rb') as f:
+                video.video_output = File(f, name=path.name)
+                video.save()
 
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 

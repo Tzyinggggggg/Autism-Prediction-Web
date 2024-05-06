@@ -45,19 +45,12 @@ import {
 	TooltipTrigger,
 	TooltipProvider,
 } from "@/components/ui/tooltip";
-import ReactPlayer from "react-player";
-import JsPDF from "jspdf";
 
-interface ApiOutput {
-	id: number;
-	title: string;
-	video: string;
-	video_output: string;
-	results: [number, number, [string, number][]];
-	prediction_percentage: string;
-	created_at: string;
-	patient: string;
-}
+import dynamic from "next/dynamic";
+const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
+
+import JsPDF from "jspdf";
+import { useState, useEffect } from "react";
 
 const API_OUTPUT = {
 	id: 163,
@@ -272,58 +265,6 @@ const API_OUTPUT = {
 };
 type Result = [number, number, [string, number][]];
 
-// Initialize total duration variables for each behavior
-function calculateTotalTime(results: Result[]): number {
-	return results.reduce(
-		(totalTime, [start, end]) => totalTime + (end - start),
-		0
-	);
-}
-
-// Remove the duplicate type declaration
-// type Result = [number, number, [string, number][]];
-
-function calculateBehaviorTime(results: Result[], behavior: string): number {
-	let behaviorTime = 0;
-	results.forEach(([start, end, behaviors]) => {
-		const behaviorPercentage = behaviors.find(
-			([name]) => name === behavior
-		)?.[1];
-		if (behaviorPercentage) {
-			behaviorTime += (end - start) * (behaviorPercentage / 100);
-		}
-	});
-	return behaviorTime;
-}
-
-const totalTime = calculateTotalTime(API_OUTPUT.results as Result[]);
-const normalTime = calculateBehaviorTime(
-	API_OUTPUT.results as Result[],
-	"normal"
-);
-const headbangingTime = calculateBehaviorTime(
-	API_OUTPUT.results as Result[],
-	"headbanging"
-);
-const armflappingTime = calculateBehaviorTime(
-	API_OUTPUT.results as Result[],
-	"armflapping"
-);
-const spinningTime = calculateBehaviorTime(
-	API_OUTPUT.results as Result[],
-	"spinning"
-);
-
-// Store the calculated times in a library for later retrieval
-const behaviorTimes = {
-	normal: normalTime,
-	headbanging: headbangingTime,
-	armflapping: armflappingTime,
-	spinning: spinningTime,
-};
-
-export { behaviorTimes };
-
 // import video from "../../public/andretry163_output.mp4";
 const generatePDF = () => {
 	const reportElement = document.querySelector(".pdf-content") as HTMLElement;
@@ -336,6 +277,106 @@ const generatePDF = () => {
 };
 
 export default function Dashboard() {
+	const [loading, setLoading] = useState(false);
+	const [patientName, setPatientName] = useState("");
+
+	const [data, setData] = useState<{
+		patient: string;
+		results: any;
+		prediction_percentage: string;
+		video_output: string;
+		video: any;
+	}>({
+		patient: "",
+		results: [],
+		prediction_percentage: "",
+		video_output: "",
+		video: null,
+	});
+
+	// Update the patient property in the data state when user inputs something
+	const handlePatientNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const newName = e.target.value;
+		setPatientName(newName);
+		setData((prevData) => ({
+			...prevData,
+			patient: newName, // Update the patient property with the new name
+		}));
+	};
+
+	const [behaviorTimes, setBehaviorTimes] = useState({
+		normal: 0,
+		headbanging: 0,
+		armflapping: 0,
+		spinning: 0,
+	});
+	const [videoUrl, setVideoUrl] = useState("");
+	const uploadVideo = async (data: any) => {
+		console.log(data);
+		setLoading(true);
+		const formData = new FormData();
+		formData.append("patient", data["patient"]);
+		formData.append("results", JSON.stringify(data["results"])),
+			formData.append("prediction_percentage", data["prediction_percentage"]);
+		formData.append("video_output", data["video_output"]);
+		formData.append("video", data["video"]);
+
+		await fetch("http://127.0.0.1:8000/api/upload/", {
+			method: "POST",
+			body: formData,
+		}).then(async (res) => {
+			console.log(data);
+			// api output
+			const output_data = await res.json();
+			console.log(output_data);
+			if (output_data.results && output_data.results.length > 0) {
+				const normalTime = calculateBehaviorTime(
+					output_data.results as Result[],
+					"normal"
+				);
+				const headbangingTime = calculateBehaviorTime(
+					output_data.results as Result[],
+					"headbanging"
+				);
+				const armflappingTime = calculateBehaviorTime(
+					output_data.results as Result[],
+					"armflapping"
+				);
+				const spinningTime = calculateBehaviorTime(
+					output_data.results as Result[],
+					"spinning"
+				);
+				// Store the calculated times in a library for later retrieval
+				setBehaviorTimes({
+					normal: normalTime,
+					headbanging: headbangingTime,
+					armflapping: armflappingTime,
+					spinning: spinningTime,
+				});
+			}
+			console.log(behaviorTimes.armflapping);
+			if (output_data.video_output) {
+				const outputUrl = `http://127.0.0.1:8000${output_data.video_output}`;
+				setVideoUrl(outputUrl);
+			}
+		});
+		setLoading(false);
+	};
+
+	// Update behavior times when data changes
+	function calculateBehaviorTime(results: Result[], behavior: string): number {
+		let behaviorTime = 0;
+		results.forEach(([start, end, behaviors]) => {
+			const behaviorPercentage = behaviors.find(
+				([name]) => name === behavior
+			)?.[1];
+			if (behaviorPercentage) {
+				behaviorTime += (end - start) * (behaviorPercentage / 100);
+			}
+		});
+		return behaviorTime;
+	}
+
 	return (
 		<div className='grid h-screen w-full pl-[56px]'>
 			<aside className='inset-y fixed  left-0 z-20 flex h-full flex-col border-r'>
@@ -386,9 +427,6 @@ export default function Dashboard() {
 					<h1 className='text-xl font-semibold'>Autism Prediction</h1>
 					<div className='ml-auto gap-1.5 text-sm'>
 						<div className='ml-auto'>
-							<Button variant='outline' size='sm' className='mr-2 text-sm'>
-								Predict
-							</Button>
 							<Button
 								variant='outline'
 								size='sm'
@@ -412,7 +450,16 @@ export default function Dashboard() {
 								</legend>
 								<div className='grid gap-3'>
 									<Label htmlFor='PatientName'>
-										Patient Name: {API_OUTPUT.title}
+										Patient Name:
+										<input
+											type='text'
+											id='PatientName'
+											name='PatientName'
+											value={patientName}
+											onChange={handlePatientNameChange}
+											className='border border-gray-300 rounded-md p-2'
+											placeholder='Enter patient name'
+										/>
 									</Label>
 									<Label style={{ marginTop: "10px" }}>
 										Self-stimulatory behavior :
@@ -454,35 +501,61 @@ export default function Dashboard() {
 						<Badge variant='outline' className='absolute right-3 top-3'>
 							Output
 						</Badge>
-						<div className='flex-1' />
-
-						<form
-							className='relative overflow-hidden rounded-lg border bg-background focus-within:ring-1 focus-within:ring-ring'
-							x-chunk='dashboard-03-chunk-1'
+						<div
+							className='flex items-center justify-center'
+							style={{ height: "50%" }}
 						>
-							<Label htmlFor='message' className='sr-only'>
-								Message
-							</Label>
-							<Textarea className='min-h-12 resize-none border-0 p-3 shadow-none focus-visible:ring-0' />
-							<div className='flex items-center p-3 pt-0'>
-								<TooltipProvider>
-									<Tooltip>
-										<TooltipTrigger asChild>
-											<Button variant='ghost' size='icon'>
-												<Paperclip className='size-4' />
+							<ReactPlayer
+								className='react-player'
+								url={videoUrl}
+								width='50%'
+								height='70%'
+								controls={true}
+								style={{ minWidth: "100px", minHeight: "100px" }} // Set the minimum width and height for the video
+							/>
+						</div>
 
-												<span className='sr-only'>Attach file</span>
-											</Button>
-										</TooltipTrigger>
-										<TooltipContent side='top'>Attach File</TooltipContent>
-									</Tooltip>
-								</TooltipProvider>
-								<Button type='submit' size='sm' className='ml-auto gap-1.5'>
-									Predict
-									<CornerDownLeft className='size-3.5' />
-								</Button>
+						<div className='resize-none border-0 p-3 shadow-none focus-visible:ring-0' />
+						{/* <div className='relative flex-grow'>
+							<div className='timeline'>
+								<div className='relative flex-grow'></div>
 							</div>
-						</form>
+						</div> */}
+						<div
+							className='progress-bar'
+							style={{ display: loading ? "block" : "none" }}
+						>
+							<div className='progress-bar-inner' />
+						</div>
+						<div className='flex items-center p-3 pt-0'>
+							<TooltipProvider>
+								<Tooltip>
+									<TooltipTrigger asChild>
+										<Input
+											id='video'
+											type='file'
+											onChange={(e) => {
+												const file = e.target.files?.[0];
+												// console.log(data);
+												setData({ ...data, video: file });
+											}}
+										/>
+									</TooltipTrigger>
+									<TooltipContent side='top'>Attach File</TooltipContent>
+								</Tooltip>
+							</TooltipProvider>
+							<Button
+								type='submit'
+								size='sm'
+								className='ml-auto gap-1.5'
+								onClick={() => {
+									uploadVideo(data);
+								}}
+							>
+								Predict
+								<CornerDownLeft className='size-3.5' />
+							</Button>
+						</div>
 					</div>
 				</main>
 			</div>

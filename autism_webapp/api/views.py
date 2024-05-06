@@ -88,7 +88,7 @@ class VideoAPIView(APIView):
                 predictions=predictions,
                 output_path='media/videos/' + output_path)
 
-            path = Path('media/videos/' + output_path)
+            video.video_output = 'videos/' + output_path
             video.results = predictions
             with path.open(mode='rb') as f:
                 video.video_output = File(f, name=path.name)

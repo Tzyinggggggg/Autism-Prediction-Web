@@ -22,78 +22,78 @@ from django.core.files import File
 
 
 def index(request):
-    if request.method == 'POST':
-        form = VideoUploadForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
+   if request.method == 'POST':
+       form = VideoUploadForm(request.POST, request.FILES)
+       if form.is_valid():
+           form.save()
 
-            patient = form.cleaned_data['patient']
-            video = form.cleaned_data['video']
+           patient = form.cleaned_data['patient']
+           video = form.cleaned_data['video']
 
-            csrf_token = get_token(request=request)
-            headers = {'X-CSRFToken': csrf_token}
-            data = {
-                "csrfmiddlewaretoken": csrf_token,
-                "patient": patient,
-                "results": {},
-                "prediction_percentage": "",
-                "video_output": ""
-            }
+           csrf_token = get_token(request=request)
+           headers = {'X-CSRFToken': csrf_token}
+           data = {
+               "csrfmiddlewaretoken": csrf_token,
+               "patient": patient,
+               "results": {},
+               "prediction_percentage": "",
+               "video_output": ""
+           }
 
-            # Replace with your API endpoint URL
-            api_url = 'http://127.0.0.1:8000/api/upload/'
-            response = requests.post(
-                api_url, data=data, files={'video': video}, headers=headers)
+           # Replace with your API endpoint URL
+           api_url = 'http://127.0.0.1:8000/api/upload/'
+           response = requests.post(
+               api_url, data=data, files={'video': video}, headers=headers)
 
-            if response.status_code == 201:
-                print(response.json())
+           if response.status_code == 201:
+               print(response.json())
 
-                id = response.json().get('id')
-                video = Video.objects.get(id=id)
-                print(video.video.url, video.video_output.url)
-                return render(request, 'index.html', {
-                    'video_path': video.video,
-                    'video_output_path': video.video_output,
-                    'results': video.results,
-                    'status': 'success',
-                    'form': form
-                })
-            else:
+               id = response.json().get('id')
+               video = Video.objects.get(id=id)
+               print(video.video.url, video.video_output.url)
+               return render(request, 'index.html', {
+                   'video_path': video.video,
+                   'video_output_path': video.video_output,
+                   'results': video.results,
+                   'status': 'success',
+                   'form': form
+               })
+           else:
 
-                return render(request, 'index.html', {'error_message': 'Failed to upload video', 'form': form})
-    else:
-        form = VideoUploadForm()
-    return render(request, 'index.html', {'form': form})
+               return render(request, 'index.html', {'error_message': 'Failed to upload video', 'form': form})
+   else:
+       form = VideoUploadForm()
+   return render(request, 'index.html', {'form': form})
 
 
 class VideoAPIView(APIView):
-    serializer_class = VideoSerializer
+   serializer_class = VideoSerializer
 
-    def post(self, request):
-        data = request.data
+   def post(self, request):
+       data = request.data
 
-        print(data)
+       print(data)
 
-        serializer = self.serializer_class(data=data)
-        if serializer.is_valid():
+       serializer = self.serializer_class(data=data)
+       if serializer.is_valid():
 
-            video: Video = serializer.save()
-            predictions = Model().predict_stream(video_path=video.video.path)
+           video: Video = serializer.save()
+           predictions = Model().predict_stream(video_path=video.video.path)
 
-            output_path = str(video.patient) + str(video.pk) + "_output.mp4"
+           output_path = str(video.patient) + str(video.pk) + "_output.mp4"
 
-            # Mask video with prediction
-            save_video_stream_predictions_v2(
-                video_path=video.video.path,
-                predictions=predictions,
-                output_path='media/videos/' + output_path)
+           # Mask video with prediction
+           save_video_stream_predictions_v2(
+               video_path=video.video.path,
+               predictions=predictions,
+               output_path='media/videos/' + output_path)
 
-            video.video_output = 'videos/' + output_path
-            video.results = predictions
-            with path.open(mode='rb') as f:
-                video.video_output = File(f, name=path.name)
-                video.save()
+           path = Path('media/videos/' + output_path)
+           video.results = predictions
+           with path.open(mode='rb') as f:
+               video.video_output = File(f, name=path.name)
+               video.save()
 
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+           return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+       return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

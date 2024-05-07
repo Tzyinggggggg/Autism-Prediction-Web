@@ -317,15 +317,17 @@ export default function Dashboard() {
 		const formData = new FormData();
 		formData.append("patient", data["patient"]);
 		formData.append("results", JSON.stringify(data["results"])),
-			formData.append("prediction_percentage", data["prediction_percentage"]);
+		formData.append("prediction_percentage", data["prediction_percentage"]);
 		formData.append("video_output", data["video_output"]);
 		formData.append("video", data["video"]);
 
+		// show loading
 		await fetch("http://127.0.0.1:8000/api/upload/", {
 			method: "POST",
 			body: formData,
 		}).then(async (res) => {
 			console.log(data);
+			// close loading
 			// api output
 			const output_data = await res.json();
 			console.log(output_data);
@@ -359,6 +361,10 @@ export default function Dashboard() {
 				const outputUrl = `http://127.0.0.1:8000${output_data.video_output}`;
 				setVideoUrl(outputUrl);
 			}
+		}).catch((e) => {
+			// close loading
+			console.log(e)
+			// shopw somejing when error
 		});
 		setLoading(false);
 	};
@@ -525,7 +531,7 @@ export default function Dashboard() {
 							className='progress-bar'
 							style={{ display: loading ? "block" : "none" }}
 						>
-							<div className='progress-bar-inner' />
+							<div className='progress-bar-inner'> LOADINGGGGGGGGGGGGG</div>
 						</div>
 						<div className='flex items-center p-3 pt-0'>
 							<TooltipProvider>
@@ -548,6 +554,7 @@ export default function Dashboard() {
 								type='submit'
 								size='sm'
 								className='ml-auto gap-1.5'
+								disabled={loading}
 								onClick={() => {
 									uploadVideo(data);
 								}}

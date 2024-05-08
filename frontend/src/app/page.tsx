@@ -286,12 +286,14 @@ export default function Dashboard() {
 		prediction_percentage: string;
 		video_output: string;
 		video: any;
+		emotion_results: { [key: string]: number };
 	}>({
 		patient: "",
 		results: [],
 		prediction_percentage: "",
 		video_output: "",
 		video: null,
+		emotion_results: {},
 	});
 
 	// Update the patient property in the data state when user inputs something
@@ -310,6 +312,7 @@ export default function Dashboard() {
 		armflapping: 0,
 		spinning: 0,
 	});
+	const [emotionTimes, setEmotionTimes] = useState({});
 	const [videoUrl, setVideoUrl] = useState("");
 	const uploadVideo = async (data: any) => {
 		console.log(data);
@@ -317,55 +320,59 @@ export default function Dashboard() {
 		const formData = new FormData();
 		formData.append("patient", data["patient"]);
 		formData.append("results", JSON.stringify(data["results"])),
-		formData.append("prediction_percentage", data["prediction_percentage"]);
+			formData.append("prediction_percentage", data["prediction_percentage"]);
 		formData.append("video_output", data["video_output"]);
 		formData.append("video", data["video"]);
+		formData.append("emotion_results", JSON.stringify(data["emotion_results"]));
 
 		// show loading
 		await fetch("http://127.0.0.1:8000/api/upload/", {
 			method: "POST",
 			body: formData,
-		}).then(async (res) => {
-			console.log(data);
-			// close loading
-			// api output
-			const output_data = await res.json();
-			console.log(output_data);
-			if (output_data.results && output_data.results.length > 0) {
-				const normalTime = calculateBehaviorTime(
-					output_data.results as Result[],
-					"normal"
-				);
-				const headbangingTime = calculateBehaviorTime(
-					output_data.results as Result[],
-					"headbanging"
-				);
-				const armflappingTime = calculateBehaviorTime(
-					output_data.results as Result[],
-					"armflapping"
-				);
-				const spinningTime = calculateBehaviorTime(
-					output_data.results as Result[],
-					"spinning"
-				);
-				// Store the calculated times in a library for later retrieval
-				setBehaviorTimes({
-					normal: normalTime,
-					headbanging: headbangingTime,
-					armflapping: armflappingTime,
-					spinning: spinningTime,
-				});
-			}
-			console.log(behaviorTimes.armflapping);
-			if (output_data.video_output) {
-				const outputUrl = `http://127.0.0.1:8000${output_data.video_output}`;
-				setVideoUrl(outputUrl);
-			}
-		}).catch((e) => {
-			// close loading
-			console.log(e)
-			// shopw somejing when error
-		});
+		})
+			.then(async (res) => {
+				console.log(data);
+				// close loading
+				// api output
+				const output_data = await res.json();
+				console.log(output_data);
+				if (output_data.results && output_data.results.length > 0) {
+					const normalTime = calculateBehaviorTime(
+						output_data.results as Result[],
+						"normal"
+					);
+					const headbangingTime = calculateBehaviorTime(
+						output_data.results as Result[],
+						"headbanging"
+					);
+					const armflappingTime = calculateBehaviorTime(
+						output_data.results as Result[],
+						"armflapping"
+					);
+					const spinningTime = calculateBehaviorTime(
+						output_data.results as Result[],
+						"spinning"
+					);
+					// Store the calculated times in a library for later retrieval
+					setBehaviorTimes({
+						normal: normalTime,
+						headbanging: headbangingTime,
+						armflapping: armflappingTime,
+						spinning: spinningTime,
+					});
+					setEmotionTimes(output_data.emotion_results);
+				}
+				console.log(behaviorTimes.armflapping);
+				if (output_data.video_output) {
+					const outputUrl = `http://127.0.0.1:8000${output_data.video_output}`;
+					setVideoUrl(outputUrl);
+				}
+			})
+			.catch((e) => {
+				// close loading
+				console.log(e);
+				// shopw somejing when error
+			});
 		setLoading(false);
 	};
 
@@ -471,18 +478,18 @@ export default function Dashboard() {
 										Self-stimulatory behavior :
 										<ul style={{ marginTop: "20px" }}>
 											<li style={{ marginBottom: "10px" }}>
-												Normal : {behaviorTimes.normal.toFixed(2)} minutes
+												Normal : {behaviorTimes.normal.toFixed(2)} seconds
 											</li>
 											<li style={{ marginBottom: "10px" }}>
 												Headbanging : {behaviorTimes.headbanging.toFixed(2)}{" "}
-												minutes
+												seconds
 											</li>
 											<li style={{ marginBottom: "10px" }}>
 												Armflapping : {behaviorTimes.armflapping.toFixed(2)}{" "}
-												minutes
+												seconds
 											</li>
 											<li style={{ marginBottom: "10px" }}>
-												Spinning : {behaviorTimes.spinning.toFixed(2)} minutes
+												Spinning : {behaviorTimes.spinning.toFixed(2)} seconds
 											</li>
 										</ul>
 									</Label>
@@ -493,11 +500,16 @@ export default function Dashboard() {
 								<legend className='-ml-1 px-1 text-sm font-medium'>
 									Emotion :
 								</legend>
-								<Label htmlFor=''>
+								<Label htmlFor='emotions'>
 									<ul>
-										<li style={{ marginBottom: "10px" }}>Happy :</li>
+										{Object.entries(emotionTimes).map(([emotion, value]) => (
+											<li key={emotion} style={{ marginBottom: "10px" }}>
+												{emotion || "No emotion detected"}: {value.toFixed(2)}
+											</li>
+										))}
+										{/* <li style={{ marginBottom: "10px" }}>Happy :</li>
 										<li style={{ marginBottom: "10px" }}>Sad :</li>
-										<li style={{ marginBottom: "10px" }}>Angry :</li>
+										<li style={{ marginBottom: "10px" }}>Angry :</li> */}
 									</ul>
 								</Label>
 							</fieldset>

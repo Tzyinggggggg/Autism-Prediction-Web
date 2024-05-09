@@ -279,6 +279,30 @@ const generatePDF = () => {
 export default function Dashboard() {
 	const [loading, setLoading] = useState(false);
 	const [patientName, setPatientName] = useState("");
+	const handleSubmit = () => {
+		// Check if patientName is valid
+		if (patientName.length < 3 || patientName.length > 30) {
+			alert("Patient name must be between 3 and 30 characters.");
+			return;
+		}
+
+		// Check if video file is provided and has the correct format
+		const videoFile = data.video;
+		if (!videoFile) {
+			alert("Please select a video file.");
+			return;
+		}
+
+		const allowedFormats = ["mp4", "mov"];
+		const fileExtension = videoFile.name.split(".").pop().toLowerCase();
+		if (!allowedFormats.includes(fileExtension)) {
+			alert("Only MP4 and MOV video formats are allowed.");
+			return;
+		}
+
+		// If both validations pass, call the uploadVideo function
+		uploadVideo(data);
+	};
 
 	const [data, setData] = useState<{
 		patient: string;
@@ -295,14 +319,13 @@ export default function Dashboard() {
 		video: null,
 		emotion_results: {},
 	});
-
 	// Update the patient property in the data state when user inputs something
 	const handlePatientNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const newName = e.target.value;
 		setPatientName(newName);
 		setData((prevData) => ({
 			...prevData,
-			patient: newName, // Update the patient property with the new name
+			patient: newName,
 		}));
 	};
 
@@ -507,9 +530,6 @@ export default function Dashboard() {
 												{emotion || "No emotion detected"}: {value.toFixed(2)}
 											</li>
 										))}
-										{/* <li style={{ marginBottom: "10px" }}>Happy :</li>
-										<li style={{ marginBottom: "10px" }}>Sad :</li>
-										<li style={{ marginBottom: "10px" }}>Angry :</li> */}
 									</ul>
 								</Label>
 							</fieldset>
@@ -567,9 +587,7 @@ export default function Dashboard() {
 								size='sm'
 								className='ml-auto gap-1.5'
 								disabled={loading}
-								onClick={() => {
-									uploadVideo(data);
-								}}
+								onClick={handleSubmit}
 							>
 								Predict
 								<CornerDownLeft className='size-3.5' />

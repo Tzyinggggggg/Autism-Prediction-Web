@@ -281,8 +281,15 @@ export default function Dashboard() {
 	const [patientName, setPatientName] = useState("");
 	const handleSubmit = () => {
 		// Check if patientName is valid
-		if (patientName.length < 3 || patientName.length > 30) {
-			alert("Patient name must be between 3 and 30 characters.");
+		const patientNameRegex = /^[a-zA-Z\\s]+$/; // Only allows letters and spaces
+		if (
+			patientName.length < 3 ||
+			patientName.length > 30 ||
+			!patientNameRegex.test(patientName)
+		) {
+			alert(
+				"Invalid patient name format. Cannot include numbers or special characters. Name must be between 3 and 30 characters."
+			);
 			return;
 		}
 
@@ -290,6 +297,14 @@ export default function Dashboard() {
 		const videoFile = data.video;
 		if (!videoFile) {
 			alert("Please select a video file.");
+			return;
+		}
+
+		// Check file size (maximum 100MB)
+		const maxFileSizeMB = 100;
+		const maxFileSizeBytes = maxFileSizeMB * 1024 * 1024; // Convert MB to bytes
+		if (videoFile.size > maxFileSizeBytes) {
+			alert("The maximum file size that can be uploaded is 100MB.");
 			return;
 		}
 
@@ -527,7 +542,8 @@ export default function Dashboard() {
 									<ul>
 										{Object.entries(emotionTimes).map(([emotion, value]) => (
 											<li key={emotion} style={{ marginBottom: "10px" }}>
-												{emotion || "No emotion detected"}: {value.toFixed(2)}
+												{emotion || "No emotion detected"}: {value.toFixed(2)}{" "}
+												seconds
 											</li>
 										))}
 									</ul>

@@ -343,6 +343,13 @@ export default function Dashboard() {
 			patient: newName,
 		}));
 	};
+	// const handlePatientNameChange = (newName: string) => {
+	// 	setPatientName(newName);
+	// 	setData((prevData) => ({
+	// 		...prevData,
+	// 		patient: newName,
+	// 	}));
+	// };
 
 	const [behaviorTimes, setBehaviorTimes] = useState({
 		normal: 0,
@@ -500,18 +507,20 @@ export default function Dashboard() {
 									Result
 								</legend>
 								<div className='grid gap-3'>
-									<Label htmlFor='PatientName'>
-										Patient Name:
+									<div className='flex items-center'>
+										<Label htmlFor='PatientName' className='mr-4'>
+											Patient Name :
+										</Label>
 										<input
 											type='text'
 											id='PatientName'
 											name='PatientName'
 											value={patientName}
 											onChange={handlePatientNameChange}
-											className='border border-gray-300 rounded-md p-2'
+											className='border border-gray-300 '
 											placeholder='Enter patient name'
 										/>
-									</Label>
+									</div>
 									<Label style={{ marginTop: "10px" }}>
 										Self-stimulatory behavior :
 										<ul style={{ marginTop: "20px" }}>
@@ -519,7 +528,7 @@ export default function Dashboard() {
 												Normal : {behaviorTimes.normal.toFixed(2)} seconds
 											</li>
 											<li style={{ marginBottom: "10px" }}>
-												Headbanging : {behaviorTimes.headbanging.toFixed(2)}{" "}
+												Head Banging : {behaviorTimes.headbanging.toFixed(2)}{" "}
 												seconds
 											</li>
 											<li style={{ marginBottom: "10px" }}>

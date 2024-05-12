@@ -1,17 +1,5 @@
 from django.db import models
-import uuid
 from .validators import file_size
-
-
-class Patient(models.Model):
-    patient_id = models.UUIDField(
-        primary_key=True, default=uuid.uuid4, editable=False)
-    patient_name = models.CharField(max_length=50, unique=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self) -> str:
-        return self.patient_name
-
 
 class Video(models.Model):
     # Update field name to match database

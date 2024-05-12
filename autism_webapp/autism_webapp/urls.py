@@ -18,12 +18,12 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from api.views import index
+from django.http import HttpResponse
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('api/', include('api.urls')),
-    path('', index, name='index'),
+    path('', lambda _: HttpResponse("<h1>API</h1>")),
 ]
 
 if settings.DEBUG:

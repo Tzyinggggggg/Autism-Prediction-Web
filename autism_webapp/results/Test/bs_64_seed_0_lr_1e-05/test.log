@@ -3120,3 +3120,1365 @@ TypeError: 'PosixPath' object is not subscriptable
              weight_decay: 0.0005                        
 ----------------- End -------------------
 2024-05-09 17:18:25,437:INFO: writting logs to file results/Test/bs_64_seed_0_lr_1e-05/test.log
+2024-05-12 00:57:58,472:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 00:57:58,474:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 02:05:17,905:ERROR: Internal Server Error: /api/upload/
+Traceback (most recent call last):
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\pytorchvideo\data\encoded_video_pyav.py", line 49, in __init__
+    self._container = av.open(file)
+  File "av\\container\\core.pyx", line 420, in av.container.core.open
+  File "av\\container\\core.pyx", line 266, in av.container.core.Container.__cinit__
+  File "av\\container\\core.pyx", line 286, in av.container.core.Container.err_check
+  File "av\\error.pyx", line 328, in av.error.err_check
+av.error.InvalidDataError: [Errno 1094995529] Invalid data found when processing input: '<none>'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py", line 109, in post
+    predictions = Model().predict_stream(video_path=video.video.path)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\vcab\model.py", line 45, in predict_stream
+    return Prediction(model=self.__model).predict_stream(video_path=video_path)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\vcab\prediction.py", line 65, in predict_stream
+    video_datas = Transform().transform_stream(video_path=video_path)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\vcab\transform.py", line 99, in transform_stream
+    video = EncodedVideo.from_path(video_path)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\pytorchvideo\data\encoded_video.py", line 69, in from_path
+    return video_cls(
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\pytorchvideo\data\encoded_video_pyav.py", line 51, in __init__
+    raise RuntimeError(f"Failed to open video {video_name}. {e}")
+RuntimeError: Failed to open video v_Headbanging_22_action.mp4. [Errno 1094995529] Invalid data found when processing input: '<none>'
+2024-05-12 02:19:03,813:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 02:19:03,821:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 02:19:25,475:ERROR: Internal Server Error: /api/upload/
+Traceback (most recent call last):
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py", line 84, in post
+    cap = ffmpegcv.VideoCapture('media/videos/' + path.name)
+UnboundLocalError: local variable 'path' referenced before assignment
+2024-05-12 02:19:46,551:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py changed, reloading.
+2024-05-12 02:19:51,535:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 02:19:51,537:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 02:19:55,518:ERROR: Internal Server Error: /api/upload/
+Traceback (most recent call last):
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py", line 84, in post
+    cap = ffmpegcv.VideoCapture(video.video.path)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\ffmpegcv\__init__.py", line 154, in VideoCapture
+    return FFmpegReader.VideoReader(
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\ffmpegcv\ffmpeg_reader.py", line 128, in VideoReader
+    assert os.path.exists(filename) and os.path.isfile(
+AssertionError: media/videos/C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\media\videos\ArmFlapping_01_1_gbsch0C.mp4 not exists
+2024-05-12 02:21:17,185:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py changed, reloading.
+2024-05-12 02:21:22,526:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 02:21:22,529:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 02:21:24,610:ERROR: Internal Server Error: /api/upload/
+Traceback (most recent call last):
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py", line 84, in post
+    cap = cv2.VideoCapture(video.video.path)
+NameError: name 'cv2' is not defined
+2024-05-12 02:21:35,461:ERROR: Internal Server Error: /api/upload/
+Traceback (most recent call last):
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py", line 84, in post
+    cap = cv2.VideoCapture(video.video.path)
+NameError: name 'cv2' is not defined
+2024-05-12 02:21:53,947:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py changed, reloading.
+2024-05-12 02:22:00,650:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 02:22:00,651:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 02:22:28,264:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py changed, reloading.
+2024-05-12 02:22:33,302:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 02:22:33,304:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 02:22:38,849:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py changed, reloading.
+2024-05-12 02:22:43,920:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 02:22:43,922:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 02:24:04,385:ERROR: Internal Server Error: /api/upload/
+Traceback (most recent call last):
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py", line 102, in post
+    emotions_result[key] /= fps
+KeyError: 0.03333333333333333
+2024-05-12 02:24:50,986:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py changed, reloading.
+2024-05-12 02:24:57,922:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 02:24:57,924:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 02:25:37,049:ERROR: Internal Server Error: /api/upload/
+Traceback (most recent call last):
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py", line 104, in post
+    emotions_result[key] /= fps
+KeyError: 0.03333333333333333
+2024-05-12 02:29:29,657:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py changed, reloading.
+2024-05-12 02:29:35,752:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 02:29:35,753:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 02:29:44,636:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py changed, reloading.
+2024-05-12 02:29:49,571:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 02:29:49,573:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 02:29:51,893:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py changed, reloading.
+2024-05-12 02:29:56,694:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 02:29:56,695:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 02:29:58,922:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py changed, reloading.
+2024-05-12 02:30:03,790:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 02:30:03,791:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 02:30:05,981:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py changed, reloading.
+2024-05-12 02:30:10,921:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 02:30:10,926:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 02:30:25,283:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py changed, reloading.
+2024-05-12 02:30:30,278:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 02:30:30,279:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 02:31:12,406:ERROR: Internal Server Error: /api/upload/
+Traceback (most recent call last):
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py", line 103, in post
+    emotion = self.calculate_emotion(probs)
+  File "C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py", line 66, in calculate_emotion
+    "Happy": (float(probs[4]) > threshold) and (float(probs[9]) > threshold),
+KeyError: 4
+2024-05-12 02:32:30,200:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py changed, reloading.
+2024-05-12 02:32:36,394:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 02:32:36,396:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 02:39:26,620:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py changed, reloading.
+2024-05-12 02:39:32,892:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 02:39:32,893:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 02:39:53,088:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py changed, reloading.
+2024-05-12 02:39:58,371:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 02:39:58,372:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 02:40:07,419:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py changed, reloading.
+2024-05-12 02:40:12,677:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 02:40:12,679:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 02:40:18,177:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py changed, reloading.
+2024-05-12 02:40:23,127:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 02:40:23,127:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 02:40:29,909:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py changed, reloading.
+2024-05-12 02:40:35,128:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 02:40:35,129:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 02:40:39,718:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py changed, reloading.
+2024-05-12 02:40:44,743:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 02:40:44,745:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 02:40:49,414:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py changed, reloading.
+2024-05-12 02:40:54,540:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 02:40:54,541:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 02:41:06,783:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py changed, reloading.
+2024-05-12 02:41:12,987:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 02:41:12,990:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 02:41:20,793:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py changed, reloading.
+2024-05-12 02:41:26,093:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 02:41:26,094:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 02:41:31,858:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py changed, reloading.
+2024-05-12 02:41:36,975:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 02:41:36,976:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 02:42:05,692:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py changed, reloading.
+2024-05-12 02:42:11,715:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 02:42:11,718:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 02:42:22,737:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py changed, reloading.
+2024-05-12 02:42:27,975:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 02:42:27,977:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 02:42:32,547:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py changed, reloading.
+2024-05-12 02:42:37,830:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 02:42:37,832:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 02:44:26,637:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py changed, reloading.
+2024-05-12 02:44:32,214:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 02:44:32,215:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 02:44:52,282:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py changed, reloading.
+2024-05-12 02:44:57,928:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 02:44:57,930:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 02:45:09,008:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py changed, reloading.
+2024-05-12 02:45:14,609:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 02:45:14,611:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 02:45:23,554:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py changed, reloading.
+2024-05-12 02:45:29,306:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 02:45:29,308:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 02:47:00,592:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py changed, reloading.
+2024-05-12 02:47:05,917:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 02:47:05,920:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 02:47:08,468:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py changed, reloading.
+2024-05-12 02:47:14,254:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 02:47:14,256:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 02:47:57,520:ERROR: Internal Server Error: /api/upload/
+Traceback (most recent call last):
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "c:\Users\Andreas\Autism-Prediction-Web\autism_webapp\.venv\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py", line 111, in post
+    emotions_result[key] /= fps
+KeyError: 0.03333333333333333
+2024-05-12 02:48:34,401:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py changed, reloading.
+2024-05-12 02:48:40,967:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 02:48:40,967:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 03:24:41,198:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\api\views.py changed, reloading.
+2024-05-12 03:24:49,022:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 03:24:49,024:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 03:25:26,373:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 03:25:26,375:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 03:25:41,245:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\autism_webapp\urls.py changed, reloading.
+2024-05-12 03:25:45,830:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 03:25:45,832:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 03:26:45,588:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\autism_webapp\urls.py changed, reloading.
+2024-05-12 03:26:51,934:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 03:26:51,936:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 03:26:57,661:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\autism_webapp\urls.py changed, reloading.
+2024-05-12 03:27:02,433:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 03:27:02,434:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 03:27:06,851:INFO: C:\Users\Andreas\Autism-Prediction-Web\autism_webapp\autism_webapp\urls.py changed, reloading.
+2024-05-12 03:27:11,671:INFO: ----------------- Options ---------------
+                      arc: swin_transformer_base         
+               batch_size: 64                            
+                crop_size: 224                           
+                  dataset: hybrid                        
+             dataset_path: data/Hybrid                   
+                draw_text: False                         
+                   epochs: 20                            
+                 evaluate: True                          
+                 exp_name: Test                          
+                  gpu_ids: 0                             
+                    input:                               
+                      lam: 0.001                         
+            learning_rate: 1e-05                         
+                   metric: dots                          
+             neighbor_num: 4                             
+         num_main_classes: 27                            
+          num_sub_classes: 14                            
+              num_workers: 4                             
+            optimizer_eps: 1e-08                         
+                   outdir: results\Test\bs_64_seed_0_lr_1e-05
+                   resume:                               
+                     seed: 0                             
+                    stage: 1                             
+             weight_decay: 0.0005                        
+----------------- End -------------------
+2024-05-12 03:27:11,673:INFO: writting logs to file results\Test\bs_64_seed_0_lr_1e-05\test.log
+2024-05-12 03:27:14,758:WARNING: Not Found: /favicon.ico

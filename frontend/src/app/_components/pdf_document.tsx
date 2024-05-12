@@ -12,10 +12,12 @@ const styles = StyleSheet.create({
 
 const ReportPDF = ({
   patientName,
+  percentage,
   actions,
   emotions,
 }: {
   patientName: string;
+  percentage: any;
   actions: any;
   emotions: any;
 }) => (
@@ -23,6 +25,9 @@ const ReportPDF = ({
     <Page size={"A4"} style={styles.page}>
       <View style={styles.section}>
         <Text> Patient Name : {patientName} </Text>
+      </View>
+      <View style={styles.section}>
+        <Text> Severity : {percentage}% </Text>
       </View>
       <View style={styles.section}>
         <Text> Actions </Text>
@@ -44,4 +49,4 @@ const ReportPDF = ({
   </Document>
 );
 
-export default ReportPDF
+export default ReportPDF;

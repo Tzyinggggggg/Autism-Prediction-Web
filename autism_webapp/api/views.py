@@ -26,6 +26,7 @@ class VideoAPIView(APIView):
     def post(self, request):
         data = request.data
         serializer = self.serializer_class(data=data)
+
         if serializer.is_valid():
 
             video: Video = serializer.save()
@@ -46,7 +47,6 @@ class VideoAPIView(APIView):
 
             path = Path('media/videos/' + output_path)
 
-
             emotions_result = {}
             for _, probs in emotions.items():
                 emotion = self.calculate_emotion(probs)
@@ -59,9 +59,8 @@ class VideoAPIView(APIView):
             for key in emotions_result:
                 emotions_result[key] /= fps
                 
-            print(emotions_result)
-
             video.results = actions
+            video.prediction_percentage = autism_percentage
             with path.open(mode='rb') as f:
                 video.video_output = File(f, name=path.name)
                 video.emotion_results = emotions_result

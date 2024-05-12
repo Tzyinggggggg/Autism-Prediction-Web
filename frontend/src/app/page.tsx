@@ -34,6 +34,7 @@ export default function Dashboard() {
     spinning: 0,
   });
   const [emotionTimes, setEmotionTimes] = useState({});
+  const [autismPercentage, setAutismPercentage] = useState(0);
 
   const formMethods = useForm({
     defaultValues: {
@@ -89,6 +90,7 @@ export default function Dashboard() {
     })
       .then(async (res) => {
         const output_data = await res.json();
+
         if (output_data.results && output_data.results.length > 0) {
           const normalTime = calculateBehaviorTime(
             output_data.results as Result[],
@@ -106,25 +108,30 @@ export default function Dashboard() {
             output_data.results as Result[],
             "spinning"
           );
-          // Store the calculated times in a library for later retrieval
+
           setBehaviorTimes({
             normal: normalTime,
             headbanging: headbangingTime,
             armflapping: armflappingTime,
             spinning: spinningTime,
           });
+
           setEmotionTimes(output_data.emotion_results);
         }
-        console.log(behaviorTimes.armflapping);
+
+        setAutismPercentage(output_data.prediction_percentage);
+
         if (output_data.video_output) {
           const outputUrl = `http://127.0.0.1:8000${output_data.video_output}`;
           setVideoUrl(outputUrl);
         }
       })
       .catch((e) => {
-        // close loading
-        console.log(e);
-        // shopw somejing when error
+        toast({
+          variant: "destructive",
+          title: "Uh oh! Something went wrong.",
+          description: e.message,
+        });
       });
   };
 
@@ -198,6 +205,7 @@ export default function Dashboard() {
               <Separator />
               <ActionEmotionOutput
                 patientName={getValues("patient")}
+                percentage={autismPercentage}
                 behaviorTimes={behaviorTimes}
                 emotionTimes={emotionTimes}
                 isSubmitting={isSubmitting}

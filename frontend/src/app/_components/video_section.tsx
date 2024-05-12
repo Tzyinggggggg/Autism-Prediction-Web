@@ -18,7 +18,13 @@ const VideoSection = ({
       </Badge>
       <div className="resize-none border-0 p-3 shadow-none focus-visible:ring-0" />
       <div className="flex items-center justify-center h-full">
-        {videoUrl ? (
+        {isSubmitting ? (
+          <Skeleton className="flex flex-col items-center justify-center h-full w-full rounded-xl bg-gray-300">
+            <h2 className="text-2xl font-semibold tracking-tight first:mt-0">
+              Generating Video... It may take some time
+            </h2>
+          </Skeleton>
+        ) : videoUrl ? (
           <ReactPlayer
             className="react-player"
             url={videoUrl}
@@ -27,12 +33,6 @@ const VideoSection = ({
             controls={true}
             style={{ minWidth: "100px", minHeight: "100px" }}
           />
-        ) : isSubmitting ? (
-          <Skeleton className="flex flex-col items-center justify-center h-full w-full rounded-xl bg-gray-300">
-            <h2 className="text-2xl font-semibold tracking-tight first:mt-0">
-              Generating Video...
-            </h2>
-          </Skeleton>
         ) : (
           <div className="flex flex-col items-center justify-center">
             <h1 className="text-3xl font-semibold tracking-tight first:mt-0">

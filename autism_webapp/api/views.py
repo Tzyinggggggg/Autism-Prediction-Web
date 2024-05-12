@@ -8,7 +8,7 @@ from pathlib import Path
 from django.core.files import File
 import cv2
 class VideoAPIView(APIView):
-    serializer_class = VideoSerializer
+   serializer_class = VideoSerializer
 
     def calculate_emotion(self, probs, threshold=0.15):
         emotions = {
@@ -35,7 +35,7 @@ class VideoAPIView(APIView):
             fps = cap.get(cv2.CAP_PROP_FPS)
             cap.release()
 
-            output_path = str(video.patient) + str(video.pk) + "_output.mp4"
+           output_path = str(video.patient) + str(video.pk) + "_output.mp4"
 
             actions, emotions, autism, autism_percentage, video_output = Model(
             ).predict_stream_emotion(video_path=video.video.path)
@@ -66,6 +66,6 @@ class VideoAPIView(APIView):
                 video.emotion_results = emotions_result
                 video.save()
 
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+           return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+       return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

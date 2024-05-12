@@ -22,7 +22,8 @@
 *.pem
 
 *.mp4
-__pycache__/
+**/__pycache__/
+*.sqlite3
 
 # debug
 npm-debug.log*

@@ -1,6 +1,10 @@
 import { Label } from "@/components/ui/label";
 
-const EmotionFieldSet = ({ emotionTimes }: any) => {
+const EmotionFieldSet = ({
+  emotionTimes,
+}: {
+  emotionTimes: { [emotion: string]: number };
+}) => {
   return (
     <fieldset className="grid gap-6 rounded-lg border p-4">
       <legend className="-ml-1 px-1 text-sm font-medium">Emotion :</legend>

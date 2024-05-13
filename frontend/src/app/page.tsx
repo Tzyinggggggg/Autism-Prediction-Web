@@ -61,7 +61,7 @@ export default function Dashboard() {
             : errors.patient?.message || errors.video?.message,
       });
     }
-  }, [errors]);
+  }, [errors, toast]);
 
   const onSubmit = async (values: any) => {
     const { patient, video } = values;

@@ -18,8 +18,8 @@ const ReportPDF = ({
 }: {
   patientName: string;
   percentage: any;
-  actions: any;
-  emotions: any;
+  actions: { [name: string]: number };
+  emotions: { [name: string]: number };
 }) => (
   <Document>
     <Page size={"A4"} style={styles.page}>
@@ -31,16 +31,16 @@ const ReportPDF = ({
       </View>
       <View style={styles.section}>
         <Text> Actions </Text>
-        {Object.entries(actions).map(([name, value]) => (
-          <Text>
+        {Object.entries(actions).map(([name, value], index) => (
+          <Text key={index}>
             {name}: {value.toFixed(2)} seconds
           </Text>
         ))}
       </View>
       <View style={styles.section}>
         <Text> Emotions </Text>
-        {Object.entries(emotions).map(([name, value]) => (
-          <Text>
+        {Object.entries(emotions).map(([name, value], index) => (
+          <Text key={index}>
             {name || "No emotion detected"}: {value.toFixed(2)} seconds
           </Text>
         ))}

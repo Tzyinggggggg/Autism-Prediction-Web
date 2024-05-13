@@ -10,7 +10,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build-macos:
+  build-macos-python:
 
     runs-on: macos-latest
     defaults:
@@ -43,7 +43,7 @@ jobs:
       run: |
         brew install ffmpeg
 
-  build:
+  build-ubuntu-python:
 
     runs-on: ubuntu-latest
     defaults:
@@ -76,3 +76,50 @@ jobs:
       run: |
         sudo apt install ffmpeg
 
+  build-ubuntu-node:
+    runs-on: ubuntu-latest
+    defaults:
+        run:
+            working-directory: ./frontend
+
+    strategy:
+        fail-fast: false
+        matrix:
+            node-version: [14.x, 16.x, 18.x, 20.x, 22.x]
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: 'frontend/package-lock.json'
+    - name: Installing packages
+      run: npm ci
+    - name: Building
+      run: npm run build --if-present
+
+  build-macos-node:
+    runs-on: ubuntu-latest
+    defaults:
+        run:
+            working-directory: ./frontend
+
+    strategy:
+        fail-fast: false
+        matrix:
+            node-version: [14.x, 16.x, 18.x, 20.x, 22.x]
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: 'frontend/package-lock.json'
+    - name: Installing packages
+      run: npm ci
+    - name: Building
+      run: npm run build --if-present

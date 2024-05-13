@@ -3,6 +3,7 @@ SHELL := /bin/bash
 
 install:
 	cd autism_webapp && pip install -r requirements.txt
+	cd autism_webapp && python manage.py migrate
 	cd frontend && npm ci
 
 run-backend:
